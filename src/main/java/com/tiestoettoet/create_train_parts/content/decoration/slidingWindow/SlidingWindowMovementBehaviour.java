@@ -236,6 +236,6 @@ public class SlidingWindowMovementBehaviour implements MovementBehaviour {
     @Override
     @OnlyIn(Dist.CLIENT)
     public void renderInContraption(MovementContext context, VirtualRenderWorld renderWorld, ContraptionMatrices matrices, MultiBufferSource buffer) {
-        SlidingWindowRenderer.renderInContraption(context, renderWorld, matrices, buffer);
+        SlidingWindowMovementBehaviourRenderer.renderInContraption(context, renderWorld, matrices, buffer);
     }
 }

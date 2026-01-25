@@ -1,9 +1,7 @@
 package com.tiestoettoet.create_train_parts.content.decoration.trainStep;
 
-import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.api.behaviour.movement.MovementBehaviour;
 import com.simibubi.create.content.contraptions.Contraption;
-import com.simibubi.create.content.contraptions.ContraptionWorld;
 import com.simibubi.create.content.contraptions.behaviour.MovementContext;
 import com.simibubi.create.content.contraptions.elevator.ElevatorColumn;
 import com.simibubi.create.content.contraptions.elevator.ElevatorContraption;
@@ -15,10 +13,8 @@ import com.simibubi.create.content.trains.entity.CarriageContraptionEntity;
 import com.simibubi.create.content.trains.station.GlobalStation;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.virtualWorld.VirtualRenderWorld;
-import net.createmod.catnip.animation.AnimationTickHolder;
 import net.createmod.catnip.animation.LerpedFloat;
 import net.createmod.catnip.animation.LerpedFloat.Chaser;
-import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -231,19 +227,6 @@ public class TrainStepMovementBehaviour implements MovementBehaviour {
         if(!(context.temporaryData instanceof TrainStepAnimationData ad))
             return;
 
-        ContraptionWorld world = context.contraption.getContraptionWorld();
-        int light = LevelRenderer.getLightColor(renderWorld, context.localPos);
-        float animValue = ad.animation.getValue(AnimationTickHolder.getPartialTicks(context.world));
-        PoseStack ms = matrices.getModel();
-        TrainStepRenderer.renderTrainStep(
-                context.state,
-                context.localPos,
-                world,
-                animValue,
-                ms,
-                light,
-                buffer,
-                matrices
-        );
+        TrainStepMovementBehaviourRenderer.renderInContraption(context, renderWorld, matrices, buffer, ad.animation);
     }
 }

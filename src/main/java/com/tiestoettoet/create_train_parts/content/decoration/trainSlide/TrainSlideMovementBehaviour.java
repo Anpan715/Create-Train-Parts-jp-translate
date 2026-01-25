@@ -1,11 +1,8 @@
 package com.tiestoettoet.create_train_parts.content.decoration.trainSlide;
 
-import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.content.contraptions.elevator.ElevatorColumn;
 import com.simibubi.create.content.contraptions.render.ContraptionMatrices;
 import com.simibubi.create.foundation.virtualWorld.VirtualRenderWorld;
-import net.createmod.catnip.animation.AnimationTickHolder;
-import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
 
 import com.simibubi.create.api.behaviour.movement.MovementBehaviour;
@@ -246,20 +243,6 @@ public class TrainSlideMovementBehaviour implements MovementBehaviour {
         if (!(context.temporaryData instanceof TrainSlideAnimationData ae))
             return;
 
-
-        float animValue = ae.animation.getValue(AnimationTickHolder.getPartialTicks(context.world));
-        PoseStack ms = matrices.getModel();
-        int light = LevelRenderer.getLightColor(renderWorld, context.localPos);
-        Level world = context.contraption.getContraptionWorld();
-        TrainSlideRenderer.renderTrainSlide(
-                context.state,
-                context.localPos,
-                world,
-                animValue,
-                ms,
-                buffer,
-                light,
-                matrices
-        );
+        TrainSlideMovementBehaviourRenderer.renderInContraption(context, renderWorld, matrices, buffer, ae.animation);
     }
 }
